@@ -29,134 +29,152 @@ public class PartnerTest extends TestCase {
     
   }
   
-  @JExercise(tests = "void setPartner(objectstructures.Partner)", description = "Tests the following sequence:<ul><li>p1.setPartner(p2)</li></ul>")
+  @JExercise(tests = "Partner(String);void setPartner(objectstructures.Partner)", description = "<h3>Enkelt partnerskap</h3>Tests \r\n\t\tthe following sequence:\r\n\t\t<ul>\r\n\t\t<li>Partnerskap inng\u00E5s: p1.setPartner(p2)</li>\r\n\t\t</ul>\r\n")
   public void testPartner() {
-    _test__partner_transitions0_source();
-    _transition__partner_transitions0();
-    _test__partner_transitions0_target();
+    _test__partner_transitions0_source_state();
+    _transition_exprAction__partner_transitions0_actions0();
+    _test__partner_transitions0_effect_state();
     
   }
   
-  @JExercise(tests = "void setPartner(objectstructures.Partner)", description = "Tests the following sequence:<ul><li>p1.setPartner(p2)</li><li>p1.setPartner(null)</li></ul>")
+  @JExercise(tests = "Partner(String);void setPartner(objectstructures.Partner)", description = "<h3>Partnerskap med etterf\u00F8lgende brudd</h3>Tests \r\n\t\tthe following sequence:\r\n\t\t<ul>\r\n\t\t<li>Partnerskap inng\u00E5s: p1.setPartner(p2)</li>\r\n\t\t<li>Partnerskap brytes: p1.setPartner(null)</li>\r\n\t\t</ul>\r\n")
   public void testDivorce() {
-    _transition__divorce_transitions0();
-    _test__divorce_transitions0_target();
-    _transition__divorce_transitions1();
-    _test__divorce_transitions1_divorced();
+    _transition_exprAction__divorce_transitions0_actions0();
+    _test__divorce_transitions0_effect_state();
+    _transition_exprAction__divorce_transitions1_actions0();
+    _test__divorce_transitions1_effect_divorced();
     
   }
   
-  @JExercise(tests = "void setPartner(objectstructures.Partner)", description = "Tests the following sequence:<ul><li>p1.setPartner(p2)</li><li>p3.setPartner(p4)</li><li>p1.setPartner(p4)</li></ul>")
+  @JExercise(tests = "Partner(String);void setPartner(objectstructures.Partner)", description = "<h3>Partnerskap med etterf\u00F8lgende kombinert brudd og nytt partnerskap</h3>Tests \r\n\t\tthe following sequence:\r\n\t\t<ul>\r\n\t\t<li>Partnerskap inng\u00E5s: p1.setPartner(p2)</li>\r\n\t\t<li>Partnerskap inng\u00E5s: p3.setPartner(p4)</li>\r\n\t\t<li>Kombinert brudd og nytt partnerskap: p1.setPartner(p4)</li>\r\n\t\t</ul>\r\n")
   public void testSwinger() {
     Partner p3 = _init__swinger_p3();
     Partner p4 = _init__swinger_p4();
-    _transition__swinger_transitions0(p3,p4);
-    _test__swinger_transitions0_target(p3,p4);
-    _transition__swinger_transitions1(p3,p4);
-    _test__swinger_transitions1_target(p3,p4);
-    _transition__swinger_transitions2(p3,p4);
-    _test__swinger_transitions2_target(p3,p4);
+    _transition_exprAction__swinger_transitions0_actions0(p3, p4);
+    _test__swinger_transitions0_effect_state(p3, p4);
+    _transition_exprAction__swinger_transitions1_actions0(p3, p4);
+    _test__swinger_transitions1_effect_state(p3, p4);
+    _transition_exprAction__swinger_transitions2_actions0(p3, p4);
+    _test__swinger_transitions2_effect_state(p3, p4);
     
   }
   
-  private void _test__partner_transitions0_source() {
-    _test__partner_transitions0_source_objectTests0_propertyTests0(p1);
-    _test__partner_transitions0_source_objectTests1_propertyTests0(p2);
+  private void _test__partner_transitions0_source_state() {
+    _test__partner_transitions0_source_state_objectTests0_propertyTests0(p1);
+    _test__partner_transitions0_source_state_objectTests1_propertyTests0(p2);
     
   }
   
-  private void _transition__partner_transitions0() {
-    this.p1.setPartner(this.p2);
-  }
-  
-  private void _test__partner_transitions0_target() {
-    _test__partner_transitions0_target_objectTests0_propertyTests0(p1);
-    _test__partner_transitions0_target_objectTests1_propertyTests0(p2);
+  private void _transition_exprAction__partner_transitions0_actions0() {
+    try {
+      
+      this.p1.setPartner(this.p2);
+      } catch (junit.framework.AssertionFailedError error) {
+      fail("p1.setPartner(p2) failed: " + error.getMessage());
+    }
     
   }
   
-  private boolean _test__partner_transitions0_source_objectTests0_propertyTests0(final Partner it) {
+  private void _test__partner_transitions0_effect_state() {
+    _test__partner_transitions0_effect_state_objectTests0_propertyTests0(p1);
+    _test__partner_transitions0_effect_state_objectTests1_propertyTests0(p2);
     
-    Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, null);
-    assertTrue("partner == null; failed after p1.setPartner(p2)", _equals);
-    return _equals;
   }
   
-  private boolean _test__partner_transitions0_source_objectTests1_propertyTests0(final Partner it) {
+  private boolean _test__partner_transitions0_source_state_objectTests0_propertyTests0(final Partner it) {
     
     Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, null);
-    assertTrue("partner == null; failed after p1.setPartner(p2)", _equals);
-    return _equals;
+    assertEquals("partner == null failed after p1.setPartner(p2)", null, _partner);
+    return Objects.equal(_partner, null);
+    
   }
   
-  private boolean _test__partner_transitions0_target_objectTests0_propertyTests0(final Partner it) {
+  private boolean _test__partner_transitions0_source_state_objectTests1_propertyTests0(final Partner it) {
     
     Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, this.p2);
-    assertTrue("partner == p2; failed after p1.setPartner(p2)", _equals);
-    return _equals;
+    assertEquals("partner == null failed after p1.setPartner(p2)", null, _partner);
+    return Objects.equal(_partner, null);
+    
   }
   
-  private boolean _test__partner_transitions0_target_objectTests1_propertyTests0(final Partner it) {
+  private boolean _test__partner_transitions0_effect_state_objectTests0_propertyTests0(final Partner it) {
     
     Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, this.p1);
-    assertTrue("partner == p1; failed after p1.setPartner(p2)", _equals);
-    return _equals;
-  }
-  
-  private void _transition__divorce_transitions0() {
-    this.p1.setPartner(this.p2);
-  }
-  
-  private void _test__divorce_transitions0_target() {
-    _test__divorce_transitions0_target_objectTests0_propertyTests0(p1);
-    _test__divorce_transitions0_target_objectTests1_propertyTests0(p2);
+    assertEquals("partner == p2 failed after p1.setPartner(p2)", this.p2, _partner);
+    return Objects.equal(_partner, this.p2);
     
   }
   
-  private void _transition__divorce_transitions1() {
-    this.p1.setPartner(null);
-  }
-  
-  private void _test__divorce_transitions1_divorced() {
-    _test__divorce_transitions1_divorced_objectTests0_propertyTests0(p1);
-    _test__divorce_transitions1_divorced_objectTests1_propertyTests0(p2);
-    
-  }
-  
-  private boolean _test__divorce_transitions0_target_objectTests0_propertyTests0(final Partner it) {
+  private boolean _test__partner_transitions0_effect_state_objectTests1_propertyTests0(final Partner it) {
     
     Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, this.p2);
-    assertTrue("partner == p2; failed after p1.setPartner(p2)", _equals);
-    return _equals;
+    assertEquals("partner == p1 failed after p1.setPartner(p2)", this.p1, _partner);
+    return Objects.equal(_partner, this.p1);
+    
   }
   
-  private boolean _test__divorce_transitions0_target_objectTests1_propertyTests0(final Partner it) {
+  private void _transition_exprAction__divorce_transitions0_actions0() {
+    try {
+      
+      this.p1.setPartner(this.p2);
+      } catch (junit.framework.AssertionFailedError error) {
+      fail("p1.setPartner(p2) failed: " + error.getMessage());
+    }
     
-    Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, this.p1);
-    assertTrue("partner == p1; failed after p1.setPartner(p2)", _equals);
-    return _equals;
   }
   
-  private boolean _test__divorce_transitions1_divorced_objectTests0_propertyTests0(final Partner it) {
+  private void _test__divorce_transitions0_effect_state() {
+    _test__divorce_transitions0_effect_state_objectTests0_propertyTests0(p1);
+    _test__divorce_transitions0_effect_state_objectTests1_propertyTests0(p2);
     
-    Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, null);
-    assertTrue("partner == null; failed after p1.setPartner(null)", _equals);
-    return _equals;
   }
   
-  private boolean _test__divorce_transitions1_divorced_objectTests1_propertyTests0(final Partner it) {
+  private void _transition_exprAction__divorce_transitions1_actions0() {
+    try {
+      
+      this.p1.setPartner(null);
+      } catch (junit.framework.AssertionFailedError error) {
+      fail("p1.setPartner(null) failed: " + error.getMessage());
+    }
+    
+  }
+  
+  private void _test__divorce_transitions1_effect_divorced() {
+    _test__divorce_transitions1_effect_divorced_objectTests0_propertyTests0(p1);
+    _test__divorce_transitions1_effect_divorced_objectTests1_propertyTests0(p2);
+    
+  }
+  
+  private boolean _test__divorce_transitions0_effect_state_objectTests0_propertyTests0(final Partner it) {
     
     Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, null);
-    assertTrue("partner == null; failed after p1.setPartner(null)", _equals);
-    return _equals;
+    assertEquals("partner == p2 failed after p1.setPartner(p2)", this.p2, _partner);
+    return Objects.equal(_partner, this.p2);
+    
+  }
+  
+  private boolean _test__divorce_transitions0_effect_state_objectTests1_propertyTests0(final Partner it) {
+    
+    Partner _partner = it.getPartner();
+    assertEquals("partner == p1 failed after p1.setPartner(p2)", this.p1, _partner);
+    return Objects.equal(_partner, this.p1);
+    
+  }
+  
+  private boolean _test__divorce_transitions1_effect_divorced_objectTests0_propertyTests0(final Partner it) {
+    
+    Partner _partner = it.getPartner();
+    assertEquals("partner == null failed after p1.setPartner(null)", null, _partner);
+    return Objects.equal(_partner, null);
+    
+  }
+  
+  private boolean _test__divorce_transitions1_effect_divorced_objectTests1_propertyTests0(final Partner it) {
+    
+    Partner _partner = it.getPartner();
+    assertEquals("partner == null failed after p1.setPartner(null)", null, _partner);
+    return Objects.equal(_partner, null);
+    
   }
   
   private Partner _init__swinger_p3() {
@@ -169,99 +187,117 @@ public class PartnerTest extends TestCase {
     return _partner;
   }
   
-  private void _transition__swinger_transitions0(final Partner p3, final Partner p4) {
-    this.p1.setPartner(this.p2);
-  }
-  
-  private void _test__swinger_transitions0_target(final Partner p3, final Partner p4) {
-    _test__swinger_transitions0_target_objectTests0_propertyTests0(p1, p3,p4);
-    _test__swinger_transitions0_target_objectTests1_propertyTests0(p2, p3,p4);
+  private void _transition_exprAction__swinger_transitions0_actions0(final Partner p3, final Partner p4) {
+    try {
+      
+      this.p1.setPartner(this.p2);
+      } catch (junit.framework.AssertionFailedError error) {
+      fail("p1.setPartner(p2) failed: " + error.getMessage());
+    }
     
   }
   
-  private void _transition__swinger_transitions1(final Partner p3, final Partner p4) {
-    p3.setPartner(p4);
-  }
-  
-  private void _test__swinger_transitions1_target(final Partner p3, final Partner p4) {
-    _test__swinger_transitions1_target_objectTests0_propertyTests0(p3, p3,p4);
-    _test__swinger_transitions1_target_objectTests1_propertyTests0(p4, p3,p4);
+  private void _test__swinger_transitions0_effect_state(final Partner p3, final Partner p4) {
+    _test__swinger_transitions0_effect_state_objectTests0_propertyTests0(p1, p3, p4);
+    _test__swinger_transitions0_effect_state_objectTests1_propertyTests0(p2, p3, p4);
     
   }
   
-  private void _transition__swinger_transitions2(final Partner p3, final Partner p4) {
-    this.p1.setPartner(p4);
-  }
-  
-  private void _test__swinger_transitions2_target(final Partner p3, final Partner p4) {
-    _test__swinger_transitions2_target_objectTests0_propertyTests0(p1, p3,p4);
-    _test__swinger_transitions2_target_objectTests1_propertyTests0(p4, p3,p4);
-    _test__swinger_transitions2_target_objectTests2_propertyTests0(p2, p3,p4);
-    _test__swinger_transitions2_target_objectTests3_propertyTests0(p3, p3,p4);
+  private void _transition_exprAction__swinger_transitions1_actions0(final Partner p3, final Partner p4) {
+    try {
+      
+      p3.setPartner(p4);
+      } catch (junit.framework.AssertionFailedError error) {
+      fail("p3.setPartner(p4) failed: " + error.getMessage());
+    }
     
   }
   
-  private boolean _test__swinger_transitions0_target_objectTests0_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
+  private void _test__swinger_transitions1_effect_state(final Partner p3, final Partner p4) {
+    _test__swinger_transitions1_effect_state_objectTests0_propertyTests0(p3, p3, p4);
+    _test__swinger_transitions1_effect_state_objectTests1_propertyTests0(p4, p3, p4);
     
-    Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, this.p2);
-    assertTrue("partner == p2; failed after p1.setPartner(p2)", _equals);
-    return _equals;
   }
   
-  private boolean _test__swinger_transitions0_target_objectTests1_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
+  private void _transition_exprAction__swinger_transitions2_actions0(final Partner p3, final Partner p4) {
+    try {
+      
+      this.p1.setPartner(p4);
+      } catch (junit.framework.AssertionFailedError error) {
+      fail("p1.setPartner(p4) failed: " + error.getMessage());
+    }
     
-    Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, this.p1);
-    assertTrue("partner == p1; failed after p1.setPartner(p2)", _equals);
-    return _equals;
   }
   
-  private boolean _test__swinger_transitions1_target_objectTests0_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
+  private void _test__swinger_transitions2_effect_state(final Partner p3, final Partner p4) {
+    _test__swinger_transitions2_effect_state_objectTests0_propertyTests0(p1, p3, p4);
+    _test__swinger_transitions2_effect_state_objectTests1_propertyTests0(p4, p3, p4);
+    _test__swinger_transitions2_effect_state_objectTests2_propertyTests0(p2, p3, p4);
+    _test__swinger_transitions2_effect_state_objectTests3_propertyTests0(p3, p3, p4);
     
-    Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, p4);
-    assertTrue("partner == p4; failed after p3.setPartner(p4)", _equals);
-    return _equals;
   }
   
-  private boolean _test__swinger_transitions1_target_objectTests1_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
+  private boolean _test__swinger_transitions0_effect_state_objectTests0_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
     
     Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, p3);
-    assertTrue("partner == p3; failed after p3.setPartner(p4)", _equals);
-    return _equals;
+    assertEquals("partner == p2 failed after p1.setPartner(p2)", this.p2, _partner);
+    return Objects.equal(_partner, this.p2);
+    
   }
   
-  private boolean _test__swinger_transitions2_target_objectTests0_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
+  private boolean _test__swinger_transitions0_effect_state_objectTests1_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
     
     Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, p4);
-    assertTrue("partner == p4; failed after p1.setPartner(p4)", _equals);
-    return _equals;
+    assertEquals("partner == p1 failed after p1.setPartner(p2)", this.p1, _partner);
+    return Objects.equal(_partner, this.p1);
+    
   }
   
-  private boolean _test__swinger_transitions2_target_objectTests1_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
+  private boolean _test__swinger_transitions1_effect_state_objectTests0_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
     
     Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, this.p1);
-    assertTrue("partner == p1; failed after p1.setPartner(p4)", _equals);
-    return _equals;
+    assertEquals("partner == p4 failed after p3.setPartner(p4)", p4, _partner);
+    return Objects.equal(_partner, p4);
+    
   }
   
-  private boolean _test__swinger_transitions2_target_objectTests2_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
+  private boolean _test__swinger_transitions1_effect_state_objectTests1_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
     
     Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, null);
-    assertTrue("partner == null; failed after p1.setPartner(p4)", _equals);
-    return _equals;
+    assertEquals("partner == p3 failed after p3.setPartner(p4)", p3, _partner);
+    return Objects.equal(_partner, p3);
+    
   }
   
-  private boolean _test__swinger_transitions2_target_objectTests3_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
+  private boolean _test__swinger_transitions2_effect_state_objectTests0_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
     
     Partner _partner = it.getPartner();
-    boolean _equals = Objects.equal(_partner, null);
-    assertTrue("partner == null; failed after p1.setPartner(p4)", _equals);
-    return _equals;
+    assertEquals("partner == p4 failed after p1.setPartner(p4)", p4, _partner);
+    return Objects.equal(_partner, p4);
+    
+  }
+  
+  private boolean _test__swinger_transitions2_effect_state_objectTests1_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
+    
+    Partner _partner = it.getPartner();
+    assertEquals("partner == p1 failed after p1.setPartner(p4)", this.p1, _partner);
+    return Objects.equal(_partner, this.p1);
+    
+  }
+  
+  private boolean _test__swinger_transitions2_effect_state_objectTests2_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
+    
+    Partner _partner = it.getPartner();
+    assertEquals("partner == null failed after p1.setPartner(p4)", null, _partner);
+    return Objects.equal(_partner, null);
+    
+  }
+  
+  private boolean _test__swinger_transitions2_effect_state_objectTests3_propertyTests0(final Partner it, final Partner p3, final Partner p4) {
+    
+    Partner _partner = it.getPartner();
+    assertEquals("partner == null failed after p1.setPartner(p4)", null, _partner);
+    return Objects.equal(_partner, null);
+    
   }
 }
