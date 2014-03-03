@@ -1,0 +1,33 @@
+test encapsulation.MobileUsage
+
+instance MobileUsage mobileUsage = new MobileUsage()
+
+sequence constructor "Konstruktør" {
+	-->
+	state
+	
+		mobileUsage {
+			callCount == 0;
+			callSeconds == 0;
+			messageCount == 0;
+			bytesReceived == 0;
+			bytesSent == 0;
+		}		
+}
+
+sequence Calling "legger inn en telefonsamtale" {
+	"ringer i 70 sekunder." -- registerCall(70) -->
+	state mobileUsage {
+			callCount == 1;
+			callSeconds == 70;
+		}
+		
+	 "ringer i negative sekunder" -- registerCall(-53) throws IllegalArgumentException
+	
+	-- "sjekker uendret tilstand" -->
+	state
+		mobileUsage{
+			callCount == 1;
+			callSeconds == 70;
+		}
+}
