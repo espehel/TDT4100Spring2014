@@ -1,7 +1,7 @@
 test interfaces.CardComparator
 
-//import java.util.List
-//import java.util.Collections
+import java.util.List
+import java.util.Collections
 
 instance
 	Card s1 = new Card('S', 1), Card s13 = new Card('S', 13),

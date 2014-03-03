@@ -1,8 +1,9 @@
+import java.util.Comparator;
 import java.util.Date;
 
 
 
-public class Program {
+public class Program implements Comparator{
 	public static void main(String[] args) {
 		
 		String name = "olanordmann@ntnu.no";
@@ -20,6 +21,12 @@ public class Program {
 		}
 		System.out.print("]");
 			
+	}
+
+	@Override
+	public int compare(Program o1, Program o2) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
