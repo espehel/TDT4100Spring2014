@@ -3,7 +3,7 @@ import java.util.Date;
 
 
 
-public class Program implements Comparator{
+public class Program {
 	public static void main(String[] args) {
 		
 		String name = "olanordmann@ntnu.no";
@@ -21,12 +21,6 @@ public class Program implements Comparator{
 		}
 		System.out.print("]");
 			
-	}
-
-	@Override
-	public int compare(Program o1, Program o2) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }
