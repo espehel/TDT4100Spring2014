@@ -43,7 +43,9 @@ public class TicTacToeExtended implements ConsoleGame{
 	public boolean setCell(char c, int x, int y) {
 		if (! isOccupied(x, y) || c == ' ') {
 			int index = indexAt(x, y);
+			System.out.println(x + n * y);
 			gridString = gridString.substring(0, index) + c + gridString.substring(index+1);
+			System.out.println("["+gridString+"]");
 			
 			if (c != ' ')//if char equals whitespace this is an undo-move and we dont have to save it here.
 				saveMove(c, x, y);
@@ -86,14 +88,18 @@ public class TicTacToeExtended implements ConsoleGame{
 	
 	/* 
 	 * Grid coordinates:
-	 * (0,0) | (1,0) | (2,0)
-	 * ---------------------
-	 * (0,1) | (1,1) | (2,1)
-	 * ---------------------
-	 * (0,2) | (1,2) | (2,2)
+	 * (0,0) | (1,0) | (2,0)......
+	 * ---------------------------
+	 * (0,1) | (1,1) | (2,1)......
+	 * ---------------------------
+	 * (0,2) | (1,2) | (2,2)......
+	 * ---------------------------
+	 * ......|.......|............
+	 * ---------------------------
+	 * ......|.......|............
 	 */
 	public int indexAt(int x, int y) {
-		return x + 3 * y;
+		return x + n * y;
 	}
 
 
@@ -107,26 +113,50 @@ public class TicTacToeExtended implements ConsoleGame{
 	}
 
 	private boolean checkNInARow(char c, int n, int x, int y, int dx, int dy) {
+		int counter = 0;
 		while (n > 0) {
-			if (getCell(x, y) != c) {
-				return false;
+			if (getCell(x, y) != c)
+				counter = 0;
+			else{
+				counter++;
+				System.out.println("c: " + counter + ", x: " + x + ", y: "+ y);
 			}
+			if (counter == m)
+				break;
 			x += dx;
 			y += dy;
 			n--;
 		}
-		return true;
+		return counter >= m;
 	}
 	
 	public boolean isWinner(char c) {
-		return
-			// rows
-			checkNInARow(c, 3, 0, 0, 1, 0) || checkNInARow(c, 3, 0, 1, 1, 0) || checkNInARow(c, 3, 0, 2, 1, 0)
-			|| // columns
-			checkNInARow(c, 3, 0, 0, 0, 1) || checkNInARow(c, 3, 1, 0, 0, 1) || checkNInARow(c, 3, 2, 0, 0, 1)
-			|| // diagonals
-			checkNInARow(c, 3, 0, 0, 1, 1) || checkNInARow(c, 3, 2, 0, -1, 1)
-			;
+		//checking vertical
+		boolean vertical = false;
+		for (int i = 0; i < n; i++) {
+			vertical = checkNInARow(c, m, i, 0, 0, 1);
+			if(vertical)
+				break;
+		}
+		//checking horizontal
+		boolean horizontal = false;
+		for (int i = 0; i < n; i++) {
+			horizontal = checkNInARow(c, m, 0, i, 1, 0);
+			if(horizontal)
+				break;
+		}
+		
+		
+		
+		
+		return vertical || horizontal;
+//			// rows
+//			checkNInARow(c, 3, 0, 0, 1, 0) || checkNInARow(c, 3, 0, 1, 1, 0) || checkNInARow(c, 3, 0, 2, 1, 0)
+//			|| // columns
+//			checkNInARow(c, 3, 0, 0, 0, 1) || checkNInARow(c, 3, 1, 0, 0, 1) || checkNInARow(c, 3, 2, 0, 0, 1)
+//			|| // diagonals
+//			checkNInARow(c, 3, 0, 0, 1, 1) || checkNInARow(c, 3, 2, 0, -1, 1)
+//			;
 	}
 	
 	public boolean hasWinner() {
