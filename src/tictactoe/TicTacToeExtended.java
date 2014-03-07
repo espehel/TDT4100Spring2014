@@ -8,32 +8,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
 
-public class TicTacToe implements ConsoleGame{
+public class TicTacToeExtended implements ConsoleGame{
 	
 	
 	private String gridString;
 	private char player;
 	private Stack<ArrayList<Integer>> undo;
 	private Stack<ArrayList<Integer>> redo;
-	private int n;
-	private int m;
 	
-	public TicTacToe() {
+	public TicTacToeExtended() {
 		gridString = "         ";
 		player = 'x';
 		undo = new Stack<ArrayList<Integer>>();
 		redo = new Stack<ArrayList<Integer>>();
-	}
-	public TicTacToe(int size, int goal){
-		this();
-		n = size;
-		m = goal;
-		//creates a new grid to accomodate the new size
-		StringBuilder newGrid = new StringBuilder();
-		for (int i = 0; i < size*size; i++) {
-			newGrid.append(" ");
-		}
-		gridString = newGrid.toString();
 	}
 	
 	public char getCell(int x, int y) {
@@ -63,25 +50,13 @@ public class TicTacToe implements ConsoleGame{
 	
 	public String toString() {
 		String str = "";
-		for (int y = 0; y < n; y++) {
-			for (int x = 0; x < n; x++) {
+		for (int y = 0; y <= 2; y++) {
+			for (int x = 0; x <= 2; x++) {
 				str += " " + gridString.charAt(indexAt(x, y)) + " |";
 			}
-			str = str.substring(0,str.length()-2) + newLine();
+			str = str.substring(0,str.length()-2) + " \n-----------\n"; //a small change from the "lf" for oving4 is made here. A whitespace is added before newline
 		}
-		return str.substring(0, str.length()-((n*3)+n));
-	}
-	
-	private String newLine(){
-		//there is 3 dashes per field and one dash for each column seperator
-		int rowSeperatorLength = (n*3) + (n-1);
-		StringBuilder rowSeperator = new StringBuilder();
-		rowSeperator.append(" \n");
-		for (int i = 0; i < rowSeperatorLength; i++) {
-			rowSeperator.append("-");
-		}
-		rowSeperator.append("\n");
-		return rowSeperator.toString();
+		return str.substring(0, str.length()-12);
 	}
 	
 	/* 
