@@ -11,10 +11,10 @@ import javax.imageio.stream.FileImageInputStream;
 
 public class TicTacToeProgram {
 	
-	private TicTacToe ticTacToe;
+	private TicTacToeExtended ticTacToe;
 	
 	public void init() {
-		ticTacToe = new TicTacToe(6,3);
+		ticTacToe = new TicTacToeExtended(6,3);
 	}
 	
 	private String instructions = "Enter x and y coordinate of next placement (separated by whitespace) corresponding to board positions:\n0 0|1 0|2 0\n-----------\n0 1|1 1|2 1\n-----------\n0 2|1 2|2 2\n###########\n";
