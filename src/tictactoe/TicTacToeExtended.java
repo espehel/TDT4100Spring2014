@@ -112,20 +112,19 @@ public class TicTacToeExtended implements ConsoleGame{
 		}
 	}
 
-	private boolean checkNInARow(char c, int n, int x, int y, int dx, int dy) {
+	private boolean checkNInARow(char c, int x, int y, int dx, int dy) {
 		int counter = 0;
-		while (n > 0) {
+		//while the coordinates are inside the grid
+		while ((x < n && x >= 0) && (y < n && y >= 0) ) {
 			if (getCell(x, y) != c)
 				counter = 0;
-			else{
+			else
 				counter++;
-				System.out.println("c: " + counter + ", x: " + x + ", y: "+ y);
-			}
+			//if it counts m in a row
 			if (counter == m)
 				break;
 			x += dx;
 			y += dy;
-			n--;
 		}
 		return counter >= m;
 	}
@@ -134,29 +133,46 @@ public class TicTacToeExtended implements ConsoleGame{
 		//checking vertical
 		boolean vertical = false;
 		for (int i = 0; i < n; i++) {
-			vertical = checkNInARow(c, m, i, 0, 0, 1);
+			vertical = checkNInARow(c, i, 0, 0, 1);
 			if(vertical)
 				break;
 		}
 		//checking horizontal
 		boolean horizontal = false;
 		for (int i = 0; i < n; i++) {
-			horizontal = checkNInARow(c, m, 0, i, 1, 0);
+			horizontal = checkNInARow(c, 0, i, 1, 0);
 			if(horizontal)
 				break;
 		}
 		
+		//diagonals
+		boolean diagonal = false;
+		// top right
+		for (int i = 0; i < n; i++) {
+			if(diagonal)
+				break;
+			diagonal = checkNInARow(c, i, 0, 1, 1);
+		}
+		//bottom left
+		for (int i = 0; i < n; i++) {
+			if(diagonal)
+				break;
+			diagonal = checkNInARow(c, 0, i, 1, 1);
+		}
+		//top left
+		for (int i = n-1; i >= 0; i--) {
+			if(diagonal)
+				break;
+			diagonal = checkNInARow(c, 0, i, 1, -1);
+		}
+		//bottom right
+		for (int i = 0; i < n; i++) {
+			if(diagonal)
+				break;
+			diagonal = checkNInARow(c, i, n-1, 1, -1);
+		}	
 		
-		
-		
-		return vertical || horizontal;
-//			// rows
-//			checkNInARow(c, 3, 0, 0, 1, 0) || checkNInARow(c, 3, 0, 1, 1, 0) || checkNInARow(c, 3, 0, 2, 1, 0)
-//			|| // columns
-//			checkNInARow(c, 3, 0, 0, 0, 1) || checkNInARow(c, 3, 1, 0, 0, 1) || checkNInARow(c, 3, 2, 0, 0, 1)
-//			|| // diagonals
-//			checkNInARow(c, 3, 0, 0, 1, 1) || checkNInARow(c, 3, 2, 0, -1, 1)
-//			;
+		return vertical || horizontal || diagonal;
 	}
 	
 	public boolean hasWinner() {
@@ -243,9 +259,12 @@ public class TicTacToeExtended implements ConsoleGame{
 			int y = Integer.parseInt(input.substring(1));
 			play(x, y);
 		}
-		if(isFinished())
+		if(isWinner(getCurrentPlayer()))
 			return 1;
-		return 0;	
+		else if(gridString.indexOf(' ') < 0)
+			return 0;
+		else
+			return null;		
 	}
 
 	private void saveGame(String filepath) {

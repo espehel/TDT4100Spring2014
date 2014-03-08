@@ -188,9 +188,12 @@ public class TicTacToe implements ConsoleGame{
 			int y = Integer.parseInt(input.substring(1));
 			play(x, y);
 		}
-		if(isFinished())
+		if(isWinner(getCurrentPlayer()))
 			return 1;
-		return 0;	
+		else if(gridString.indexOf(' ') < 0)
+			return 0;
+		else
+			return null;	
 	}
 
 	private void saveGame(String filepath) {
