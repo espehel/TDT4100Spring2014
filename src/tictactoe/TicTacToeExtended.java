@@ -12,28 +12,27 @@ public class TicTacToeExtended implements ConsoleGame{
 	
 	
 	private String gridString;
+	private final String NEWGRID;
 	private char player;
 	private Stack<ArrayList<Integer>> undo;
 	private Stack<ArrayList<Integer>> redo;
 	private int n;
 	private int m;
 	
-	public TicTacToeExtended() {
-		gridString = "         ";
+
+	public TicTacToeExtended(int size, int goal){
 		player = 'x';
 		undo = new Stack<ArrayList<Integer>>();
 		redo = new Stack<ArrayList<Integer>>();
-	}
-	public TicTacToeExtended(int size, int goal){
-		this();
 		n = size;
 		m = goal;
 		//creates a new grid to accomodate the new size
-		StringBuilder newGrid = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < size*size; i++) {
-			newGrid.append(" ");
+			sb.append(" ");
 		}
-		gridString = newGrid.toString();
+		gridString = sb.toString();
+		NEWGRID = gridString;
 	}
 	
 	public char getCell(int x, int y) {
@@ -45,7 +44,6 @@ public class TicTacToeExtended implements ConsoleGame{
 			int index = indexAt(x, y);
 			System.out.println(x + n * y);
 			gridString = gridString.substring(0, index) + c + gridString.substring(index+1);
-			System.out.println("["+gridString+"]");
 			
 			if (c != ' ')//if char equals whitespace this is an undo-move and we dont have to save it here.
 				saveMove(c, x, y);
@@ -237,7 +235,7 @@ public class TicTacToeExtended implements ConsoleGame{
 	
 	@Override
 	public void init() {
-		gridString = "         ";
+		gridString = NEWGRID;
 		player = 'x';
 		undo = new Stack<ArrayList<Integer>>();
 		redo = new Stack<ArrayList<Integer>>();
