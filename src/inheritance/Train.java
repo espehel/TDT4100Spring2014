@@ -19,6 +19,33 @@ public class Train {
 		}
 		return output;
 	}
+	public boolean contains(TrainCar tc){
+		return trainCars.contains(tc);
+	}
+	
+	public int getTotalWeight(){
+		int totalWeight = 0;
+		for (TrainCar tc : trainCars) {
+			totalWeight += tc.getTotalWeight();
+		}
+		return totalWeight;
+	}
+	public int getPassengerCount(){
+		int passengerCount = 0;
+		for (TrainCar tc : trainCars) {
+			if( tc instanceof PassengerCar)
+				passengerCount += ((PassengerCar) tc).getPassengerCount();
+		}
+		return passengerCount;
+	}
+	public int getCargoWeight(){
+		int cargoWeight = 0;
+		for (TrainCar tc : trainCars) {
+			if(tc instanceof CargoCar)
+				cargoWeight += ((CargoCar) tc).getCargoWeight();
+		}
+		return cargoWeight;
+	}
 	
 	public static void main(String[] args) {
 		

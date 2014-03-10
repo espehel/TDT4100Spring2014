@@ -1,0 +1,21 @@
+test inheritance.PassengerCar
+
+instance PassengerCar pc = new PassengerCar(3000, 200)
+
+sequence checkWeight {
+	
+	state {
+		pc.getTotalWeight() == 3000 + (200*80)
+		
+	}
+	--
+	pc.setPassengerCount(100)
+	-->
+	state {
+		pc.getPassengerCount() == 100
+		pc.getTotalWeight() == 3000 + (100*80)
+	}
+}
+
+
+

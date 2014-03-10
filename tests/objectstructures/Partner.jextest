@@ -1,6 +1,6 @@
 test objectstructures.Partner
 
-instances
+instance
         p1 = new Partner("1"),
         p2 = new Partner("2")
 
@@ -31,7 +31,7 @@ sequence divorce "Partnerskap med etterfølgende brudd" {
 
 sequence swinger "Partnerskap med etterfølgende kombinert brudd og nytt partnerskap" {
 
-        instances
+        instance
                 p3 = new Partner("3"),
                 p4 = new Partner("4")
 

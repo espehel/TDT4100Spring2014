@@ -14,6 +14,9 @@ public class PassengerCar extends TrainCar{
 	public int getPassengerCount(){
 		return passengerCount;
 	}
+	public void setPassengerCount(int passengerCount){
+		this.passengerCount = passengerCount;
+	}
 	
 	@Override
 	public int getTotalWeight(){

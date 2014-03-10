@@ -11,9 +11,19 @@ public class CargoCar extends TrainCar {
 	}
 	
 	
+	public int getCargoWeight() {
+		return cargoWeight;
+	}
+
+
+	public void setCargoWeight(int cargoWeight) {
+		this.cargoWeight = cargoWeight;
+	}
+
+
 	@Override
 	public int getTotalWeight(){
-		return super.getTotalWeight() + deadWeight;
+		return super.getTotalWeight() + cargoWeight;
 	}
 	
 	@Override
